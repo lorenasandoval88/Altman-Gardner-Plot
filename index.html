@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+
+    <script src="src/lib/d3/d3.min.js"></script>
+    <!-- <script src="src/lib/taffydb/taffy.js"></script> -->
+    <script src="src/lib/gaussian.js"></script>
+    <!-- <script src="src/forecast.js"></script> -->
+
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" 
+      rel="stylesheet" 
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" 
+      crossorigin="anonymous"> -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body id="body">
+  <div id="file-upload-overlay" class="overlay" style="display:none"></div>
+
+  <div class="top">
+    <div class="top-element"><h1>epiForecast</h1></div>
+    <span class="top-link"> [<a href="https://github.com/episphere/forecast">code</a>] </span>
+    <span class="top-link"> [<a href="https://observablehq.com/@siliconjazz/edm-interpretable-forecasting">notebook</a>] </span>
+    <span class="top-link"> [<a href="https://youtu.be/kU31yz6kiQA">video</a>] </span>
+  </div>
+
+  <div class="main">
+
+    <div id="file-warning" class="file-request"></div>
+
+    <div class="file-select-block">
+      <div class="collapsible">
+        Data Configuration
+        <span class="collapsible-arrow material-icons">arrow_drop_down</span>
+      </div>
+      <div id="file-select-content" class="content">
+        Load and configure the data here. You can either upload a data file or link to a 
+        <a href="https://enable-cors.org/"> CORS-enabled</a> data URL. The data must be in CSV or 
+        JSON format. The data should consist of a series of rows with at least one time field 
+        (with values which are either valid dates or integers) and at least one value field 
+        (with values which are numbers). The data can also have a group field. Within each group, 
+        the time values should be evenly spaced. 
+        <div>
+          <div class="file-select" >
+            <label for="data-select">File:</label>
+            <input type="file" id="data-select"  accept=".json,.csv" style="display: none;" />
+            <input type="button" value="Browse..." onclick="document.getElementById('data-select').click();" />
+            <label id="data-select-label" class="file-select-label" for="data-select">No file selected</label>
+          </div>
+
+          <span><b>OR</b></span>
+
+          <span class="url-select">
+            <label for="url-input">URL:</label>
+            <input id="url-input" type="url">
+            <button  id="get-button" type="button">Get</button>
+          </span>
+
+          <span id="upload-error"></span>
+        </div>
+        <div id="field-selects">
+          <div class="field-stack">
+            <div>
+              <label for="tfield-select">Time Field:</label>
+              <select class="field-select" id="tfield-select" /></select>
+            </div>
+            
+            <div>
+              <input type="checkbox" id="tfield-toggle" checked>
+              <label>Field Is Date</label><br>
+            </div>
+          </div> 
+          
+          <div>
+            <label for="vfield-select">Value Field:</label>
+            <select class="field-select" id="vfield-select"></select>
+        </div>
+
+          <div class="field-stack" style="align-items: flex-end">
+            <div>
+              <label for="gfield-select">Group Field:</label>
+              <select class="field-select" id="gfield-select"></select>
+            </div>
+            <div>
+              <label for="g-select">Group:</label>
+              <select class="field-select" id="g-select"></select>
+            </div>
+          </div>
+
+          <div style="margin-left: auto;">
+            <button  id="run-button" type="button">Run</button>
+          </div>
+        
+        </div>
+
+        
+      
+
+      </div>
+    </div>
+
+    <div id="plots" class="plots">
+
+      <div class="plot-row">
+        <div class="plot">
+          <div id="plot_ts" ></div>
+          <div class="time-control"> 
+            <div id="time-slider-container" class="slidecontainer"> </div>
+          </div>
+        </div><div class="plot"><div id="plot_alt"></div></div>
+      </div>
+
+      <div class="plot-row">
+          <div class="plot"><div id="plot_phase"></div></div>
+
+          <div id="plot-params" class="params">
+            <div>
+              
+              <label for="nn">Horizon <span title="How far into the future to forecast." class="help material-icons">help</span>:</label>
+              <input id="param-input-tp" type="number" id="nn" value=16> 
+            </div>
+
+              <div>
+                <label for="E">Embedding <span title="How many previous values to embed each neighbor with." class="help material-icons">help</span>:</label>
+                <input id="param-input-E" type="number" value=6>
+              </div>
+
+              <div>
+                <label for="param-input-nn">Neighbors <span title="How many nearest dynamic neighbors to use." class="help material-icons">help</span>:</label>
+                <input id="param-input-nn" type="number" value=8>
+              </div>
+
+              <div>
+                <label for="param-input-theta">θ <span title="Determines how much the neighbor's distance affects its weight. When θ = 0 all neighbors are weighted equally." class="help material-icons">help</span>:</label>
+                <input id="param-input-theta" type="number" value=1.0 step=0.1> 
+              </div>
+
+              <button id="param-run" type="button">Run</button>
+
+              <div>
+                <label for="param-kernel-width">Kernel Width <span title="The relative width of the kernels used to generate the shaded forecasting area." class="help material-icons">help</span>:</label>
+                <input id="param-kernel-width" type="number" value=0.1 step="0.1">
+              </div>
+
+              <div>
+                <label for="weight-coloring-toggle"> Weight Coloring</label>
+                <input type="checkbox" id="weight-coloring-toggle" checked>
+              </div>
+
+              <div>
+                <label for="show-dates-toggle">Show Dates</label>
+                <input type="checkbox" id="show-dates-toggle">
+              </div>
+
+              <div style="margin-top: 10px">
+                <label for="export-all-toggle">Export All Futures <span title="If checked, each neighbor's future is exported as a seperate time series. Otherwise, the point forecasts are exported." class="help material-icons">help</span></label>
+                <input type="checkbox" id="export-all-toggle" checked/> 
+              </div>
+
+              <!-- <div>
+                <label for="export-all-toggle">Export All Times</label>
+                <input type="checkbox" id="export-all-toggle">
+              </div> -->
+
+              <button id="export-button" type="button">Export</button>
+
+          </div>
+
+          <div class="plot"><div id="plot_weight"></div></div>
+      </div>
+    </div>
+
+    <div style="clear:both;"></div>
+    <!-- <div >
+      Hello!
+    </div> -->
+
+</div>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" 
+    crossorigin="anonymous"></script>
+</body>
+
+<!-- <script src="src/main_test.js" type="module"></script> -->
+<script src="src/main.js" type="module"></script>
+</html>
