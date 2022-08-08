@@ -1,7 +1,8 @@
-function getRandomIndex(length) { // get a random index from a sample
+console.log('boot.js loaded')
+getRandomIndex = function(length) { // get a random index from a sample
   return Math.floor(Math.random()*(length)); }
 
-function getRandomSample(array1) { // get a random sample with replacement
+getRandomSample = function(array1) { // get a random sample with replacement
     var length = array1.length;
     var newArray = []
     for(var i = length; i--;) {
@@ -10,7 +11,7 @@ function getRandomSample(array1) { // get a random sample with replacement
         newArray.push(temp);}
       return newArray}
   
-  function bootstrappingMeanDiff(arr1, arr2, size){ // get 2*n sets of random samples and subtract each pair
+bootstrappingMeanDiff = function(arr1, arr2, size){ // get 2*n sets of random samples and subtract each pair
   var meanDiffArray = []  
   for (var i = 0; i < size; i++) {
     // get the mean of sample 1 and 2
@@ -22,7 +23,7 @@ function getRandomSample(array1) { // get a random sample with replacement
   return meanDiffArray
 }
 
-  function getPercent(array, percent) {
+getPercent = function(array, percent) {
     //return array.slice(0, Math.ceil(array.length * percent / 100));
       return array[(math.floor(array.length * percent / 100))-1];
 }
@@ -36,7 +37,7 @@ function getRandomSample(array1) { // get a random sample with replacement
   //   ci.push(ciLower,ciUpper)
   //   return ci
   // }
-    function confidenceInterval2(array,alpha){ // look up z: https://www.statisticshowto.com/tables/z-table/
+confidenceInterval2 = function(array,alpha){ // look up z: https://www.statisticshowto.com/tables/z-table/
     var ci = []
     var sortedArray = array.sort()
     var ciUpper = getPercent(array,alpha)
