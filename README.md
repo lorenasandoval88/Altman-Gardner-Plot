@@ -4,7 +4,7 @@ Gardner-Altman plot for two-sample effect size, showing a difference in mean bet
 
 Gardner & Altman (1986) introduced plots for simultaneously showing confidence intervals and data, arguing that confidence intervals should be used to show the main result of studies, rather than p-values, 
 
-![image](https://user-images.githubusercontent.com/43822820/183451889-8a7df864-ccc8-432f-9187-6df062c5e32e.png)
+![image](https://user-images.githubusercontent.com/43822820/183453090-b4f3ed93-fc14-49fc-bb06-e3e75c47eef3.png)
 
 
 Gardner-Altman plot displays the two sample data on the left. The median of the sample 0 corresponds to the zero effect size on the right axis. The median of the sample 1 corresponds to the value of the effect size on right axis. The plot displays the actual median difference effect size value and the confidence intervals with the vertical error bar.
