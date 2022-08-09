@@ -1,6 +1,8 @@
 # Altman-Gardner-Plot
 Gardner-Altman plot for two-sample effect size, showing a difference in mean between two groups.
 
+Live at:
+https://lorenasandoval88.github.io/Altman-Gardner-Plot/
 
 Gardner & Altman (1986) introduced plots for simultaneously showing confidence intervals and data, arguing that confidence intervals should be used to show the main result of studies, rather than p-values, 
 
