@@ -25,7 +25,7 @@
   <div id="file-upload-overlay" class="overlay" style="display:none"></div>
 
   <div class="top">
-    <div class="top-element"><h1>epiForecast</h1></div>
+    <div class="top-element"><h1>Altman-Gardner-Plot</h1></div>
     <span class="top-link"> [<a href="https://github.com/episphere/forecast">code</a>] </span>
     <span class="top-link"> [<a href="https://observablehq.com/@siliconjazz/edm-interpretable-forecasting">notebook</a>] </span>
     <span class="top-link"> [<a href="https://youtu.be/kU31yz6kiQA">video</a>] </span>
@@ -43,7 +43,8 @@
       <div id="file-select-content" class="content">
         Load and configure the data here. You can either upload a data file or link to a 
         <a href="https://enable-cors.org/"> CORS-enabled</a> data URL. The data must be in CSV or 
-        JSON format. The data should consist of a series of rows with at least one time field 
+        JSON format. The data should consist of a series of rows with at least one time 
+          
         (with values which are either valid dates or integers) and at least one value field 
         (with values which are numbers). The data can also have a group field. Within each group, 
         the time values should be evenly spaced. 
@@ -65,34 +66,7 @@
 
           <span id="upload-error"></span>
         </div>
-        <div id="field-selects">
-          <div class="field-stack">
-            <div>
-              <label for="tfield-select">Time Field:</label>
-              <select class="field-select" id="tfield-select" /></select>
-            </div>
-            
-            <div>
-              <input type="checkbox" id="tfield-toggle" checked>
-              <label>Field Is Date</label><br>
-            </div>
-          </div> 
-          
-          <div>
-            <label for="vfield-select">Value Field:</label>
-            <select class="field-select" id="vfield-select"></select>
-        </div>
-
-          <div class="field-stack" style="align-items: flex-end">
-            <div>
-              <label for="gfield-select">Group Field:</label>
-              <select class="field-select" id="gfield-select"></select>
-            </div>
-            <div>
-              <label for="g-select">Group:</label>
-              <select class="field-select" id="g-select"></select>
-            </div>
-          </div>
+        
 
           <div style="margin-left: auto;">
             <button  id="run-button" type="button">Run</button>
