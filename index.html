@@ -91,62 +91,6 @@
         </div><div class="plot"><div id="plot_alt"></div></div>
       </div>
 
-      <div class="plot-row">
-          <div class="plot"><div id="plot_phase"></div></div>
-
-          <div id="plot-params" class="params">
-            <div>
-              
-              <label for="nn">Horizon <span title="How far into the future to forecast." class="help material-icons">help</span>:</label>
-              <input id="param-input-tp" type="number" id="nn" value=16> 
-            </div>
-
-              <div>
-                <label for="E">Embedding <span title="How many previous values to embed each neighbor with." class="help material-icons">help</span>:</label>
-                <input id="param-input-E" type="number" value=6>
-              </div>
-
-              <div>
-                <label for="param-input-nn">Neighbors <span title="How many nearest dynamic neighbors to use." class="help material-icons">help</span>:</label>
-                <input id="param-input-nn" type="number" value=8>
-              </div>
-
-              <div>
-                <label for="param-input-theta">θ <span title="Determines how much the neighbor's distance affects its weight. When θ = 0 all neighbors are weighted equally." class="help material-icons">help</span>:</label>
-                <input id="param-input-theta" type="number" value=1.0 step=0.1> 
-              </div>
-
-              <button id="param-run" type="button">Run</button>
-
-              <div>
-                <label for="param-kernel-width">Kernel Width <span title="The relative width of the kernels used to generate the shaded forecasting area." class="help material-icons">help</span>:</label>
-                <input id="param-kernel-width" type="number" value=0.1 step="0.1">
-              </div>
-
-              <div>
-                <label for="weight-coloring-toggle"> Weight Coloring</label>
-                <input type="checkbox" id="weight-coloring-toggle" checked>
-              </div>
-
-              <div>
-                <label for="show-dates-toggle">Show Dates</label>
-                <input type="checkbox" id="show-dates-toggle">
-              </div>
-
-              <div style="margin-top: 10px">
-                <label for="export-all-toggle">Export All Futures <span title="If checked, each neighbor's future is exported as a seperate time series. Otherwise, the point forecasts are exported." class="help material-icons">help</span></label>
-                <input type="checkbox" id="export-all-toggle" checked/> 
-              </div>
-
-              <!-- <div>
-                <label for="export-all-toggle">Export All Times</label>
-                <input type="checkbox" id="export-all-toggle">
-              </div> -->
-
-              <button id="export-button" type="button">Export</button>
-
-          </div>
-
           <div class="plot"><div id="plot_weight"></div></div>
       </div>
     </div>
