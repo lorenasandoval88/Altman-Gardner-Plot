@@ -16,6 +16,9 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
+
+  <title>Read Text File</title>
+
 </head>
 
 
@@ -47,13 +50,13 @@
       (with values which are integers).
     </div>
 
-    <div>
-      <div class="file-select">
-        <label for="data-select">File:</label>
-        <input type="file" id="data-select" accept=".json,.csv" style="display: none;" />
-        <input type="button" value="Browse..." onclick="document.getElementById('data-select').click();" />
-        <label id="data-select-label" class="file-select-label" for="data-select">No file selected</label>
-      </div>
+    
+
+      <input type="file" name="inputfile"
+              id="inputfile">
+      <br>
+     
+      <pre id="output"></pre>
 
       <span><b>OR</b></span>
 

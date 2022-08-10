@@ -1,17 +1,3 @@
-document.getElementById('inputfile')
-            .addEventListener('change', function() {
-              
-            var fr=new FileReader();
-            fr.onload=function(){
-                document.getElementById('output')
-                        .textContent=fr.result;
-            }
-              
-            fr.readAsText(this.files[0]);
-        })
-
-//----------------------------------------------------------------------------
-
 function getRandomIndex(length) { // get a random index from a sample
     return math.floor(math.random()*(length)); }
   
@@ -153,6 +139,9 @@ function getRandomIndex(length) { // get a random index from a sample
   console.log(plotData)
   const myDiv = document.getElementById("myDiv");
   Plotly.newPlot(myDiv, plotData, layout);
+
+
+
 
 
 
