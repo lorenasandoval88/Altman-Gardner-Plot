@@ -1,3 +1,5 @@
+// https://www.geeksforgeeks.org/how-to-read-a-local-text-file-using-javascript/
+// Read local text file
 document.getElementById('inputfile')
             .addEventListener('change', function() {
               
@@ -10,6 +12,25 @@ document.getElementById('inputfile')
             fr.readAsText(this.files[0]);
         })
 
+//----------------------------------------------------------------------------
+// https://sebhastian.com/javascript-textbox/
+// Read from text box
+
+// // create label
+// const label = document.createElement("label");
+// label.setAttribute("for", "inputtext");
+// label.innerHTML = "inputtext: ";
+
+// // insert label
+// document.body.appendChild(label);
+
+// create textbox
+//const input = document.createElement("input");
+//input.setAttribute("id", "inputtext");
+//input.setAttribute("type", "text");
+
+// insert textbox
+//document.body.appendChild(input);
 //----------------------------------------------------------------------------
 
 function getRandomIndex(length) { // get a random index from a sample
