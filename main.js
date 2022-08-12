@@ -7,12 +7,32 @@ document.getElementById('inputfile')
             fr.onload=function(){
                 document.getElementById('output')
                         .textContent=fr.result;
-            }
-              
+            }   
             fr.readAsText(this.files[0]);
         })
+// Get text input------------------------------------------------------------------
 
-//----------------------------------------------------------------------------
+function getInputValue(){
+    // Selecting the input element and get its value 
+    var inputVal = document.getElementById("inputtext").value;
+            
+    // Displaying the value
+    alert(inputVal);
+}
+
+
+
+// Two samples ---------------------------------------
+    var y1 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,1,2,3,4,5,6,7,8,9,10,11,12,13,4,1] // sample1
+    var y2 = [1,2,3,4,5,6,7,8,9,10,22,22,13,20,19,1,2,3,4,5,6,7,8,9,10,22,22,13,20,20] // sample2
+// get 300 bootstrapped difference of means
+    var boot = bootstrappingMeanDiff(y1,y2,1000) 
+// Get stats------------------------------------------------------------------
+var div = document.getElementById('myDivStats');
+div.innerHTML += "95% Confidence Interval: "
+div.innerHTML += confidenceInterval2(boot ,2.5);
+// Get data from file---------------------------------------------------------
+
 // https://sebhastian.com/javascript-textbox/
 // Read from text box
 
@@ -74,17 +94,13 @@ function getRandomIndex(length) { // get a random index from a sample
       function confidenceInterval2(array,alpha){ // look up z: https://www.statisticshowto.com/tables/z-table/
       var ci = []
       var sortedArray = array.sort()
-      var ciUpper = getPercent(array,alpha)
-      var ciLower = getPercent(array,100-alpha)
+      var ciUpper = getPercent(sortedArray,alpha)
+      var ciLower = getPercent(sortedArray,100-alpha)
       ci.push(ciLower,ciUpper)
       return ci
     }
-        //---------------------------------------
-  var y1 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,1,2,3,4,5,6,7,8,9,10,11,12,13,4,1] // sample1
-  var y2 = [1,2,3,4,5,6,7,8,9,10,22,22,13,20,19,1,2,3,4,5,6,7,8,9,10,22,22,13,20,20] // sample2
-  
-    // get 300 bootstrapped difference of means
-  var boot = bootstrappingMeanDiff(y1,y2,1000) 
+ 
+
   
     // Define plotly traces and layout
     var layout = {
@@ -170,10 +186,5 @@ function getRandomIndex(length) { // get a random index from a sample
   };
   var plotData = [ boxPlot1,boxPlot2,trace,traceLine];
   
-
-  console.log(plotData)
   const myDiv = document.getElementById("myDiv");
   Plotly.newPlot(myDiv, plotData, layout);
-
-
-
