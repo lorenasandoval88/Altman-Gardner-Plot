@@ -1,27 +1,31 @@
+dataObj = {}
+dataArr= []
 // https://www.geeksforgeeks.org/how-to-read-a-local-text-file-using-javascript/
 // Read local text file
 document.getElementById('inputfile')
             .addEventListener('change', function() {
               
             var fr=new FileReader();
-            fr.onload=function(){
+            fr.onload=function(e){
                 document.getElementById('output')
                         .textContent=fr.result;
+                    // push file data to array
+                        dataArr.push(e.target.result) 
             }   
-            fr.readAsText(this.files[0]);
+            fr.readAsText(this.files[0]); 
         })
 // Get text input------------------------------------------------------------------
 
 function getInputValue(){
     // Selecting the input element and get its value 
     var inputVal = document.getElementById("inputtext").value;
-            
+    var inputVal2 = document.getElementById("inputtext2").value;
+
     // Displaying the value
-    alert(inputVal);
+    dataObj.sample1 = inputVal
+    dataObj.sample2 = inputVal2
+    console.log(dataObj);
 }
-
-
-
 // Two samples ---------------------------------------
     var y1 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,1,2,3,4,5,6,7,8,9,10,11,12,13,4,1] // sample1
     var y2 = [1,2,3,4,5,6,7,8,9,10,22,22,13,20,19,1,2,3,4,5,6,7,8,9,10,22,22,13,20,20] // sample2
@@ -29,7 +33,8 @@ function getInputValue(){
     var boot = bootstrappingMeanDiff(y1,y2,1000) 
 // Get stats------------------------------------------------------------------
 var div = document.getElementById('myDivStats');
-div.innerHTML += "95% Confidence Interval: "
+div.innerHTML += "95% Confidence Interval of the difference of means: "
+div.innerHTML += "<br>"
 div.innerHTML += confidenceInterval2(boot ,2.5);
 // Get data from file---------------------------------------------------------
 
@@ -161,6 +166,9 @@ function getRandomIndex(length) { // get a random index from a sample
     var trace = {
       x: 2,
       y: boot,
+      marker: {
+        color: 'rgb(120, 120, 120)'
+      },
       //spanmode: 'soft',
       yaxis: 'y2',
       type: 'violin',
