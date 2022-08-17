@@ -196,3 +196,9 @@ function getRandomIndex(length) { // get a random index from a sample
   
   const myDiv = document.getElementById("myDiv");
   Plotly.newPlot(myDiv, plotData, layout);
+
+  // for require-----------
+  if(typeof(define)!='undefined'){
+    //define({getRandomIndex:getRandomIndex})
+    define({hello:"world"})
+  }
