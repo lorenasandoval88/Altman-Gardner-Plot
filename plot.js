@@ -11,7 +11,7 @@ stat.getRandomSample = (array1)  => { // get a random sample with replacement
       var length = array1.length;
       var newArray = []
       for(var i = length; i--;) {
-          var index = getRandomIndex(length);
+          var index = stat.getRandomIndex(length);
           var temp = array1[index];
           newArray.push(temp);}
         return newArray}
@@ -20,8 +20,8 @@ stat.bootstrappingMeanDiff = (arr1, arr2, size) => { // get 2*n sets of random s
     var meanDiffArray = []  
     for (var i = 0; i < size; i++) {
       // get the mean of sample 1 and 2
-      var mean1 = Math.mean(getRandomSample(arr1))
-      var mean2 = Math.mean(getRandomSample(arr2))
+      var mean1 = Math.mean(stat.getRandomSample(arr1))
+      var mean2 = Math.mean(stat.getRandomSample(arr2))
       var meanDiff = (Math.abs(mean1-mean2)).toFixed(2)
         meanDiffArray.push(meanDiff)
       }
@@ -45,8 +45,8 @@ stat.bootstrappingMeanDiff = (arr1, arr2, size) => { // get 2*n sets of random s
 stat.confidenceInterval2 = (array,alpha) => { // look up z: https://www.statisticshowto.com/tables/z-table/
       var ci = []
       var sortedArray = array.sort()
-      var ciUpper = getPercent(array,alpha)
-      var ciLower = getPercent(array,100-alpha)
+      var ciUpper = stat.getPercent(array,alpha)
+      var ciLower = stat.getPercent(array,100-alpha)
       ci.push(ciLower,ciUpper)
       return ci
     }
